@@ -25,12 +25,14 @@ var _log = (function (undefined) {
         : extractLineNumberFromStack(this.stack),
     };
 
-    args = args.concat([suffix]);
+    //args = args.concat([suffix]);
     // via @paulirish console wrapper
     if (console && console.log) {
       if (console.log.apply) {
+        console.log('if');
         console.log.apply(console, args);
       } else {
+        console.log('else if ');
         console.log(args);
       } // nicer display in some browsers
     }
@@ -73,10 +75,20 @@ DEBUGMODE = true;
 
 //_log('you should', 'see this', {a:1, b:2, c:3});
 console.log('--- regular log ---');
-//_log('you should', 'also see this', {a:4, b:8, c:16});
+_log('you should', { a: 4, b: 8, c: 16 });
 
 // turn it off
 DEBUGMODE = false;
 
 //_log('disabled, should not appear');
 console.log('--- regular log2 ---');
+
+window.debug = {
+  log: window.console.log.bind(window.console),
+  error: window.console.error.bind(window.console, 'error: %s'),
+  info: window.console.info.bind(window.console),
+  warn: window.console.warn.bind(window.console),
+};
+debug.log('wat', 'Yay custom levels.');
+debug.info('This is info.', { yasar: 'name' });
+debug.error('Bad stuff happened.');
