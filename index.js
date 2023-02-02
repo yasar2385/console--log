@@ -85,10 +85,10 @@ console.log('--- regular log2 ---');
 
 window.debug = {
   log: window.console.log.bind(window.console),
-  error: window.console.error.bind(window.console, 'error: %s'),
+  error: window.console.error.bind(window.console),
   info: window.console.info.bind(window.console),
   warn: window.console.warn.bind(window.console),
 };
 debug.log('wat', 'Yay custom levels.');
 debug.info('This is info.', { yasar: 'name' });
-debug.error('Bad stuff happened.');
+debug.error('Sad stuff happened.');
